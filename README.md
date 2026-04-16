@@ -1,36 +1,35 @@
 # 🚀 Candidate Management API
 
-A simple **Node.js + Express + MongoDB** CRUD API to manage candidates.  
+A simple **Node.js + Express + MongoDB** CRUD API to manage candidates.
 This project demonstrates REST APIs with full CRUD operations, middleware, and Mongoose features.
 
 ---
 
 ## 📌 Features
 
-- ✅ Create single & multiple candidates
-- ✅ Get all candidates
-- ✅ Get candidate by ID
-- ✅ Update candidate (PUT & PATCH)
-- ✅ Delete candidate (single)
-- ✅ Middleware (CORS, Helmet, Morgan)
-- ✅ Mongoose schema, virtuals & hooks
+* ✅ Create single & multiple candidates
+* ✅ Get all candidates
+* ✅ Get candidate by ID
+* ✅ Update candidate (PUT & PATCH)
+* ✅ Delete candidate (single & all)
+* ✅ Middleware (CORS, Helmet, Morgan)
+* ✅ Mongoose schema, virtuals & hooks
 
 ---
 
 ## 🛠️ Tech Stack
 
-- Node.js
-- Express.js
-- MongoDB
-- Mongoose
-- Postman (API testing)
+* Node.js
+* Express.js
+* MongoDB
+* Mongoose
+* Postman (API testing)
 
 ---
 
 ## 📁 Folder Structure
 
 ```
-
 backend/
 │
 ├── models/
@@ -41,8 +40,7 @@ backend/
 │
 ├── server.js
 ├── package.json
-
-````
+```
 
 ---
 
@@ -53,7 +51,7 @@ backend/
 ```bash
 git clone https://github.com/your-username/your-repo-name.git
 cd backend
-````
+```
 
 ---
 
@@ -90,8 +88,6 @@ http://localhost:5000
 ---
 
 ## 🔗 API Endpoints
-
----
 
 ### 📌 GET all candidates
 
@@ -161,6 +157,14 @@ DELETE /api/candidates/:id
 
 ---
 
+### 📌 DELETE (All)
+
+```bash
+DELETE /api/candidates
+```
+
+---
+
 ## 🧠 Important Concepts Used
 
 ### 🔹 Middleware
@@ -189,8 +193,64 @@ candidateSchema.virtual("info").get(function () {
 ```js
 candidateSchema.pre("save", function(next) {
   console.log("Saving candidate...");
+  next();
 });
 ```
+
+---
+
+## 🗄️ MongoDB Concepts Learned
+
+* 📌 **Document Model**
+
+  * Data stored as JSON-like documents (BSON)
+  * Example:
+
+    ```json
+    {
+      "name": "Suresh",
+      "skill": "React"
+    }
+    ```
+
+* 📌 **Collections & Databases**
+
+  * Database → `candidateDataBase`
+  * Collection → `candidates`
+
+* 📌 **CRUD Operations**
+
+  * Create → `insertOne()`, `insertMany()`
+  * Read → `find()`, `findOne()`
+  * Update → `updateOne()`, `updateMany()`, `$set`
+  * Delete → `deleteOne()`, `deleteMany()`
+
+* 📌 **Query Operators**
+
+  * `$set` → update fields
+  * `$gt`, `$lt` → conditions
+  * `$in`, `$or` → multiple filters
+
+* 📌 **Aggregation Basics**
+
+  * `$group` → group data
+  * `$project` → format output
+
+* 📌 **Indexing**
+
+  * Improves query performance
+  * Example:
+
+    ```js
+    candidateSchema.index({ skill: 1, status: 1 });
+    ```
+
+* 📌 **Best Practices**
+
+  * Use `_id` for updates
+  * Use `$set` to avoid overwriting documents
+  * Avoid duplicate data
+  * Validate input before saving
 
 ---
 
@@ -215,5 +275,3 @@ candidateSchema.pre("save", function(next) {
 ## 👨‍💻 Author
 
 Suresh
-
----
